@@ -1,13 +1,18 @@
 # Concurrency & Inventory
 
-## No oversell (SQL atomic decrement)
+## No oversell (atomic SQL)
 UPDATE inventory
-SET available_qty = available_qty - :q
-WHERE drop_id = :d AND available_qty >= :q;
-
-This ensures only one order succeeds when stock is low.
+SET available_qty = available_qty - :q,
+    updated_at = now()
+WHERE drop_id = :d
+  AND available_qty >= :q;
+-- app checks rows_affected == 1
 
 ## Idempotent orders
-- Client sends Idempotency-Key header.
-- First request processes and stores result under that key.
+- Client sends Idempotency-Key.
+- First request processes and persists result under this key.
 - Retries with the same key return the stored result (no duplicates).
+
+## Failure handling
+- If payment fails: increment stock back and mark order FAILED.
+- Transactional outbox ensures notifications/cache updates are never lost.
