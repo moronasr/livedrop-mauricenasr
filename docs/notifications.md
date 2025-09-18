@@ -2,17 +2,17 @@
 
 Events: drop_started, stock_low, sold_out, order_confirmed
 
-## Flow
-- Services write events into transactional outbox.
-- Publisher sends them onto the event bus (Kafka/PubSub).
-- Notification service consumes and fans out.
+Flow
+1) Services write event to transactional outbox in same DB txn.
+2) Publisher ships to event bus (Kafka/PubSub).
+3) Notification service consumes and fans out:
+   - Realtime: WebSockets (fallback SSE; supports resume)
+   - Out-of-app: Push (APNs/FCM), email/SMS
 
-## Fanout strategy
-- Creator blasts → fanout-on-read (creator feed + WS subscriptions).
-- Per-user events (order_confirmed) → fanout-on-write.
+Fanout strategy
+- Creator blasts: fanout-on-read (store once in creator feed; clients subscribe).
+- Per-user (order_confirmed): fanout-on-write (per-user queue).
+- Dynamic threshold switches mode for celebrity creators.
 
-## Delivery channels
-- Realtime: WebSockets (fallback SSE).
-- Out-of-app: Push (APNs/FCM), email/SMS.
-
-Guarantee: delivered within ~2s of event.
+Metrics
+- End-to-end delivery latency, consumer lag, push success, WS errors.
