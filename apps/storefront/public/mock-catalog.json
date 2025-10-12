@@ -1,0 +1,22 @@
+[
+  {"id":"p1","title":"Creator Tee","price":29,"image":"/logo.svg","tags":["tee","new"],"stockQty":50},
+  {"id":"p2","title":"Drop Hoodie","price":59,"image":"/logo.svg","tags":["hoodie","best"],"stockQty":30},
+  {"id":"p3","title":"Cap Classic","price":19,"image":"/logo.svg","tags":["cap"],"stockQty":80},
+  {"id":"p4","title":"Sticker Pack","price":9,"image":"/logo.svg","tags":["sticker"],"stockQty":200},
+  {"id":"p5","title":"Crew Socks","price":12,"image":"/logo.svg","tags":["socks"],"stockQty":120},
+  {"id":"p6","title":"Tote Bag","price":15,"image":"/logo.svg","tags":["bag"],"stockQty":60},
+  {"id":"p7","title":"Zip Hoodie","price":69,"image":"/logo.svg","tags":["hoodie"],"stockQty":25},
+  {"id":"p8","title":"Beanie","price":16,"image":"/logo.svg","tags":["cap"],"stockQty":70},
+  {"id":"p9","title":"Water Bottle","price":22,"image":"/logo.svg","tags":["accessory"],"stockQty":90},
+  {"id":"p10","title":"Notebook A5","price":11,"image":"/logo.svg","tags":["stationery"],"stockQty":140},
+  {"id":"p11","title":"Notebook A4","price":15,"image":"/logo.svg","tags":["stationery"],"stockQty":100},
+  {"id":"p12","title":"Keychain","price":7,"image":"/logo.svg","tags":["accessory"],"stockQty":300},
+  {"id":"p13","title":"Mug","price":18,"image":"/logo.svg","tags":["kitchen"],"stockQty":90},
+  {"id":"p14","title":"Poster","price":14,"image":"/logo.svg","tags":["poster"],"stockQty":110},
+  {"id":"p15","title":"Mousepad","price":13,"image":"/logo.svg","tags":["accessory"],"stockQty":95},
+  {"id":"p16","title":"Phone Case","price":24,"image":"/logo.svg","tags":["accessory"],"stockQty":65},
+  {"id":"p17","title":"Sweatpants","price":49,"image":"/logo.svg","tags":["pants"],"stockQty":40},
+  {"id":"p18","title":"Windbreaker","price":79,"image":"/logo.svg","tags":["jacket"],"stockQty":22},
+  {"id":"p19","title":"Crewneck","price":54,"image":"/logo.svg","tags":["sweater"],"stockQty":38},
+  {"id":"p20","title":"Athletic Shorts","price":27,"image":"/logo.svg","tags":["shorts"],"stockQty":55}
+]
