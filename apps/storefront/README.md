@@ -1,73 +1,70 @@
-# React + TypeScript + Vite
+# Week 4 – Storefront v1
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Author:** Maurice Nasr  
+**Course:** Eurisko Academy – Backend & AI Systems Design  
+**Date:** October 12, 2025  
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🛍️ Overview
+This project implements the Storefront v1 app using Vite + React + TypeScript with TailwindCSS.  
+It’s structured according to the Week 4 assignment requirements and includes the main pages of an e-commerce flow.
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## ⚙️ Tech Stack
+- Vite — Frontend build tool  
+- React (TypeScript) — Component framework  
+- TailwindCSS — Styling utility framework  
+- Zustand — Lightweight global state for cart  
+- React Router DOM — Client-side routing  
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🧭 App Structure
+apps/storefront/
+ ├── public/
+ │   ├── logo.svg
+ │   ├── mock-catalog.json      # 20+ products
+ │
+ ├── src/
+ │   ├── lib/router.tsx         # Routing setup
+ │   ├── features/cart/         # Zustand store
+ │   ├── pages/
+ │   │   ├── AppLayout.tsx
+ │   │   ├── CatalogPage.tsx
+ │   │   ├── ProductPage.tsx
+ │   │   ├── CartPage.tsx
+ │   │   ├── CheckoutPage.tsx
+ │   │   └── OrderStatusPage.tsx
+ │   └── index.css              # Tailwind imports
+ │
+ ├── tailwind.config.js
+ ├── postcss.config.js
+ └── vite.config.ts
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## 🚀 Features Implemented
+- Catalog page listing 20+ mock products  
+- Product details page with “Add to Cart”  
+- Cart with total calculation and clear option  
+- Checkout & Order status stubs  
+- TailwindCSS setup with responsive layout  
+- Fully functional routing between all views  
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+---
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🧩 Run Locally
+From repo root:
+cd apps/storefront
+npm install
+npm run dev
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Then open http://localhost:5173
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+---
+
+## ✅ Submission
+Branch: week4-storefront  
+Repo: https://github.com/moronasr/livedrop-mauricenasr/tree/week4-storefront
