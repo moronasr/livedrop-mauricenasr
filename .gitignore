@@ -4,3 +4,10 @@
 node_modules/
 venv/
 __pycache__/
+
+# Week5
+apps/api/.env
+apps/storefront/.env
+# Week5
+apps/api/.env
+apps/storefront/.env

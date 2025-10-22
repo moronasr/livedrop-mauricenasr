@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>Storefront MVP</title>
+<style>
+body { font-family: system-ui, Arial; margin: 2rem; max-width: 900px }
+input, button { padding: .6rem; margin: .3rem }
+.row { display: flex; gap: 1rem }
+</style>
+</head>
+<body>
+<h2>Customer Lookup</h2>
+<div class="row">
+  <input id="email" placeholder="demo@example.com" size="30"/>
+  <button onclick="lookup()">Find Orders</button>
+</div>
+<pre id="customers"></pre>
+
+<h2>Orders</h2>
+<ul id="orders"></ul>
+
+<h2>Track Order (SSE)</h2>
+<input id="orderId" placeholder="order id here" size="30"/>
+<button onclick="track()">Start Tracking</button>
+<pre id="status"></pre>
+
+<h2>Support Assistant</h2>
+<div class="row">
+  <input id="msg" placeholder="Where is my order 64d1... ?" size="50"/>
+  <button onclick="ask()">Ask</button>
+</div>
+<pre id="assistant"></pre>
+
+<script>
+async function lookup(){
+  const email = document.getElementById('email').value || 'demo@example.com';
+  const cu = await fetch('/api/customers?email='+encodeURIComponent(email)).then(r=>r.json());
+  document.getElementById('customers').textContent = JSON.stringify(cu,null,2);
+  if(cu.length){
+    const cid = cu[0]._id;
+    const orders = await fetch('/api/orders?customerId='+cid).then(r=>r.json());
+    document.getElementById('orders').innerHTML = orders.map(o=>(
+      '<li>'+o._id+' — '+o.status+' — $'+o.total.toFixed(2)+'</li>'
+    )).join('');
+    if(orders[0]) document.getElementById('orderId').value = orders[0]._id;
+  } else {
+    document.getElementById('orders').innerHTML = '<li>No customer</li>';
+  }
+}
+function track(){
+  const id = document.getElementById('orderId').value.trim();
+  const out = document.getElementById('status');
+  out.textContent = '';
+  const es = new EventSource('/api/orders/'+id+'/stream');
+  es.onmessage = e => {
+    const d = JSON.parse(e.data);
+    out.textContent += '\\n'+d.status+' @ '+d.at;
+    if(d.status==='DELIVERED') es.close();
+  };
+  es.onerror = ()=>{ out.textContent += '\\n[stream closed]'; es.close(); };
+}
+async function ask(){
+  const message = document.getElementById('msg').value;
+  const r = await fetch('/api/assistant',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message})});
+  const j = await r.json();
+  document.getElementById('assistant').textContent = JSON.stringify(j,null,2);
+}
+</script>
+</body>
+</html>
